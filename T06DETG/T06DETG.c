@@ -22,7 +22,7 @@ VOID swap (INT *a, INT *b)
 
 VOID GAUS( VOID )
 {
-  
+  double coef;
   int i, max_row, max_col, y, x;
   det = 1;
   
@@ -38,16 +38,16 @@ VOID GAUS( VOID )
         det = 0;
         break;
       }
-      if (max_raw != i)
+      if (max_row != i)
       {
         for (x = i; x < N; x++)
-          Swap(&A[i][x], &A[max_raw][x]);
+          swap(&A[i][x], &A[max_row][x]);
         det = -det;
       } 
       if (max_col != i)
       {
         for (y = i; y < N; y++)
-          Swap(&A[i][y], &A[max_col][y]);
+          swap(&A[i][y], &A[max_col][y]);
         det = -det;
       }
       coef = A[i + 1][i] / A[i][i];
@@ -121,7 +121,8 @@ VOID Go( int pos)
 VOID main( void )
 {
   int i;
-
+  
+  
   for (i = 0; i < MAX; i++)
     P[i] = i;
   LOADMRTX("IN.txt");
