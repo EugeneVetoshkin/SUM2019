@@ -8,7 +8,7 @@ INT P[MAX];
 BOOL isParity = 1;
 DOUBLE A[MAX][MAX];
 INT N;
-DOUBLE det;
+DOUBLE det, Gdet;
 FILE *f;
 
 
@@ -23,8 +23,8 @@ VOID swap (INT *a, INT *b)
 VOID GAUS( VOID )
 {
   double coef;
-  int i, max_row, max_col, y, x;
-  det = 1;
+  int i, j, max_row, max_col, y, x, k;
+  Gdet = 1;
   
   for (i = 0; i < N; i++)
   {
@@ -35,23 +35,29 @@ VOID GAUS( VOID )
           max_col = x, max_row = y;
       if(A[max_row][max_col] == 0)
       {
-        det = 0;
+        Gdet = 0;
         break;
       }
       if (max_row != i)
       {
         for (x = i; x < N; x++)
           swap(&A[i][x], &A[max_row][x]);
-        det = -det;
+        Gdet = -Gdet;
       } 
       if (max_col != i)
       {
         for (y = i; y < N; y++)
-          swap(&A[i][y], &A[max_col][y]);
-        det = -det;
+          swap(&A[y][i], &A[y][max_col]);
+        Gdet = -Gdet;
       }
-      coef = A[i + 1][i] / A[i][i];
-      A[i][i] = 0;
+      for (x - i + i; x < N; x++)
+      {
+        coef = A[i + 1][i] / A[i][i];
+        A[i][i] = 0;
+        for (k = i + 1; k < N; k++)
+          A[j][k] -=A[i][k] * coef;
+      }
+      Gdet *= A[i][i];
   }
 }
 
@@ -95,7 +101,10 @@ VOID Go( int pos)
 
 
   if (pos == N)
+  {
     Store();
+    GAUS();
+  }
   else 
   {
     save_parity = isParity;
@@ -103,15 +112,12 @@ VOID Go( int pos)
     for (i = pos + 1; i < N; i++ )
     {
       swap (&P[pos], &P[i]);
-      if (isParity == 0 && i != pos )
-        isParity = 1;
-      else if (isParity == 1 && i != pos)
-        isParity = 0;
+      isParity != isParity;
       Go(pos + 1);
     }
     x = P[pos];
     for (i = pos + 1; i < N; i++)
-    P[i -1] = P[i];
+      P[i -1] = P[i];
     P[N - 1] = x;
     isParity = save_parity;
   }
@@ -121,12 +127,12 @@ VOID Go( int pos)
 VOID main( void )
 {
   int i;
-  
-  
+    
   for (i = 0; i < MAX; i++)
     P[i] = i;
   LOADMRTX("IN.txt");
   Go(0);
-  printf("determinat is %f", det);
+  printf("determinat is %f\n", det);
+  printf("determinat is %f\n", Gdet);
   getchar();
 }

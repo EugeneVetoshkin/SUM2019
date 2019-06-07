@@ -186,6 +186,10 @@
 				RelativePath=".\T07GLOBE.c"
 				>
 			</File>
+			<File
+				RelativePath=".\TIMER.c"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -194,6 +198,14 @@
 			>
 			<File
 				RelativePath=".\GLOBE.h"
+				>
+			</File>
+			<File
+				RelativePath=".\MTH.h"
+				>
+			</File>
+			<File
+				RelativePath=".\TIMER.h"
 				>
 			</File>
 		</Filter>
