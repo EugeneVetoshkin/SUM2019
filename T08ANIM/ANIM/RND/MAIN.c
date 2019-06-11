@@ -1,13 +1,12 @@
+
 #include <windows.h>
 #define WND_CLASS_NAME "My window class"
 #include <math.h>
 #include <stdlib.h>
 #include "DEF.h"
-#include "ANIM\RND\RND.h" 
-#include "MTH\MTH.h"
+#include "..\RND\RND.h" 
+#include "..\MTH\MTH.h"
 #include <time.h>
-#include "resource.h"
-
 LRESULT CALLBACK MyWindowFunc(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam);
 
 INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, CHAR *CmdLine, INT ShawCmd)
@@ -20,8 +19,8 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, CHAR *CmdLine, 
   wc.cbClsExtra = 0;
   wc.cbWndExtra = 0;
   wc.hbrBackground = (HBRUSH)COLOR_WINDOW;
-  wc.hCursor = LoadCursor(hInstance, IDC_CURSOR1);
-  wc.hIcon = LoadIcon(hInstance, IDI_ICON1);
+  wc.hCursor = LoadCursor(NULL, IDI_ERROR);
+  wc.hIcon = LoadIcon(NULL, IDI_SHIELD);
   wc.hInstance = hInstance;
   wc.lpfnWndProc = MyWindowFunc;
   wc.lpszClassName = WND_CLASS_NAME;
@@ -35,7 +34,7 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, CHAR *CmdLine, 
     MessageBox(NULL, "Oh no", "ERROR", MB_OK);
     return 0;
   }
-  hWnd = CreateWindow(WND_CLASS_NAME, "OK`NO", WS_OVERLAPPEDWINDOW,
+  hWnd = CreateWindow(WND_CLASS_NAME, "OKNO", WS_OVERLAPPEDWINDOW,
     0, 0,
     900, 900,
     NULL, NULL, hInstance, NULL);
@@ -104,8 +103,8 @@ LRESULT CALLBACK MyWindowFunc(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam)
   case WM_CREATE:
     EV5_RndInit(hWnd);
     SetTimer(hWnd, 47, 2, NULL);
-    EV5_RndPrimLoad(&Pr, "cow.object");
-    EV5_RndPrimLoad(&Pr1, "cow.object");
+    EV5_RndPrimLoad(&Pr, "Giorno_Giovanna.obj");
+    EV5_RndPrimLoad(&Pr1, "Mista.obj"/*"cow.object"*/);
 
 
     return 0;
@@ -116,9 +115,9 @@ LRESULT CALLBACK MyWindowFunc(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam)
   case WM_TIMER:
     EV5_RndStart();
     //EV5_RndEnd();
-    EV5_RndCamSet(VecSet(0, 2, 10), VecSet(0, 0, 0), VecSet(0, 1, 0));
-    m = MatrMulMatr3(MatrScale(VecSet(0.1, 0.1, 0.1)), MatrRotateY(10 * (DBL)(clock() / 1000) /* RotateIndex*/), MatrTranslate(VecSet(-3, 0, 0)));
-    m1 = MatrMulMatr3(MatrScale(VecSet(0.1, 0.1, 0.1)), MatrRotateY(-10 * (DBL)(clock() / 1000)), MatrTranslate(VecSet(3, 0, 0)));
+    EV5_RndCamSet(VecSet(0, 0, 20), VecSet(0, 0, 0), VecSet(0, 1, 0));
+    m = MatrMulMatr3(MatrScale(VecSet(0.1, 0.1, 0.1)), MatrRotateY(10 * (DBL)(clock() / 1000) /* RotateIndex*/), MatrTranslate(VecSet(-6, -8, 0)));
+    m1 = MatrMulMatr3(MatrScale(VecSet(0.1, 0.1, 0.1)), MatrRotateY(-10 * (DBL)(clock() / 1000)), MatrTranslate(VecSet(6, -8, 0)));
     
     EV5_RndPrimDraw(&Pr1, m1);
     EV5_RndPrimDraw(&Pr, m);

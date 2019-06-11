@@ -189,6 +189,22 @@
 			<Filter
 				Name="animation system"
 				>
+				<File
+					RelativePath=".\ANIM\ANIM.c"
+					>
+				</File>
+				<File
+					RelativePath=".\ANIM\ANIM.h"
+					>
+				</File>
+				<File
+					RelativePath=".\ANIM\TIMER.c"
+					>
+				</File>
+				<File
+					RelativePath=".\ANIM\UNITS.c"
+					>
+				</File>
 				<Filter
 					Name="Rendering system"
 					>
@@ -222,18 +238,46 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="Units"
+				>
+				<File
+					RelativePath=".\UNITS\U_COW.c"
+					>
+				</File>
+				<File
+					RelativePath=".\UNITS\U_CTRL.c"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Header Files"
 			Filter="h;hpp;hxx;hm;inl;inc;xsd"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
+			<File
+				RelativePath=".\resource.h"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Resource Files"
 			Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav"
 			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
 			>
+			<File
+				RelativePath=".\cursor1.cur"
+				>
+			</File>
+			<File
+				RelativePath=".\icon1.ico"
+				>
+			</File>
+			<File
+				RelativePath=".\T08ANIM.rc"
+				>
+			</File>
 		</Filter>
 	</Files>
 	<Globals>

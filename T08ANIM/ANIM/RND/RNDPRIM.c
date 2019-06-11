@@ -1,18 +1,13 @@
-/*PROGRAMMER: Vetoshkin Eugene
-  IFK: EV5
-  CLASS: 10-5
-  DATE: 1.06.2019
-  FILE: "MAIN.C"
-  */
-#include "..\DEF.H"
+//#define _CRT_SECURE_NO_WARNINGS
 #include <string.h>
 #include <stdio.h>
-#include "RND.H"
-#include <stdlib.h> -- (def.h)
+#include "DEF.H"
+#include "..\MTH\MTH.h"
+#include "..\RND\RND.h"
+#include <windows.h>
 
 
-
-BOOL EV5_RndPrimCreate( ev5PRIM *Pr, INT NoofV, INT NoofI )
+BOOL EV5_RndPrimCreate(ev5PRIM *Pr, INT NoofV, INT NoofI)
 {
   INT size;
 
@@ -44,7 +39,7 @@ BOOL EV5_RndPrimCreate( ev5PRIM *Pr, INT NoofV, INT NoofI )
   return TRUE;
 } /* End of 'EV5_RndPrimCreate' function */
 
-VOID EV5_RndPrimFree( ev5PRIM *Pr )
+VOID EV5_RndPrimFree(ev5PRIM *Pr)
 {
   if (Pr->V != NULL)
     free(Pr->V);
@@ -52,7 +47,7 @@ VOID EV5_RndPrimFree( ev5PRIM *Pr )
   memset(Pr, 0, sizeof(ev5PRIM));
 } /* End of 'EV5_RndPrimFree' function */
 
-VOID EV5_RndPrimDraw( ev5PRIM *Pr, MATR World )
+VOID EV5_RndPrimDraw(ev5PRIM *Pr, MATR World)
 {
   INT i;
   POINT *pnts; /* vertex projections */
@@ -67,7 +62,7 @@ VOID EV5_RndPrimDraw( ev5PRIM *Pr, MATR World )
   for (i = 0; i < Pr->NumOfV; i++)
   {
     /* Convert from World to NDC */
-    VEC p = VecMulMatr(Pr->V[i].P, M);
+    VEC p = VectorMulMatr(Pr->V[i].P, M);
 
     /* Convert NDC to frame (viewport) */
     pnts[i].x = (p.X + 1) * EV5_RndFrameW / 2;
@@ -88,7 +83,7 @@ VOID EV5_RndPrimDraw( ev5PRIM *Pr, MATR World )
 } /* End of 'EV5_RndPrimDraw' function */
 
 
-BOOL EV5_RndPrimLoad( ev5PRIM *Pr, CHAR *FileName )
+BOOL EV5_RndPrimLoad(ev5PRIM *Pr, CHAR *FileName)
 {
   INT nv, nf;
   FILE *F;
@@ -123,7 +118,7 @@ BOOL EV5_RndPrimLoad( ev5PRIM *Pr, CHAR *FileName )
     if (Buf[0] == 'v' && Buf[1] == ' ')
     {
       DBL x, y, z;
-
+     
       sscanf(Buf + 2, "%lf%lf%lf", &x, &y, &z);
       Pr->V[nv++].P = VecSet(x, y, z);
     }
@@ -131,8 +126,8 @@ BOOL EV5_RndPrimLoad( ev5PRIM *Pr, CHAR *FileName )
     {
       INT n1, n2, n3;
 
-      sscanf(Buf + 2, "%d/%*d/%*d %d/%*d/%*d %d/%*d/%*d", &n1, &n2, &n3) == 3 ||
-        sscanf(Buf + 2, "%d//%*d %d%//%*d %d%//%*d", &n1, &n2, &n3) == 3 ||
+        sscanf(Buf + 2, "%d/%*d/%*d %d/%*d/%*d %d/%*d/%*d", &n1, &n2, &n3) == 3 ||
+        sscanf(Buf + 2, "%d%//%*d %d%//%*d %d%//%*d", &n1, &n2, &n3) == 3 ||
         sscanf(Buf + 2, "%d/%*d %d/%*d %d/%*d", &n1, &n2, &n3) == 3 ||
         sscanf(Buf + 2, "%d %d %d", &n1, &n2, &n3);
       Pr->I[nf++] = n1 - 1;
@@ -142,5 +137,3 @@ BOOL EV5_RndPrimLoad( ev5PRIM *Pr, CHAR *FileName )
   fclose(F);
   return TRUE;
 } /* End of 'EV5_RndPrimLoad' function */
-
-/* END OF "MTH.H" FILE */

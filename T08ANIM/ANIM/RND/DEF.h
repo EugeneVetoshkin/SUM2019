@@ -15,7 +15,7 @@
 #endif /* _DEBUG */
 #include <stdlib.h>
 
-#include "MTH\MTH.h"
+#include "..\MTH\MTH.h"
 
 /* 64-bit integer data types */
 typedef __int64 INT64;
