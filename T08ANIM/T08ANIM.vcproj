@@ -198,6 +198,10 @@
 					>
 				</File>
 				<File
+					RelativePath=".\ANIM\INPUT.C"
+					>
+				</File>
+				<File
 					RelativePath=".\ANIM\TIMER.c"
 					>
 				</File>
@@ -209,19 +213,19 @@
 					Name="Rendering system"
 					>
 					<File
-						RelativePath=".\RND\RND.h"
+						RelativePath=".\ANIM\RND\RND.h"
 						>
 					</File>
 					<File
-						RelativePath=".\RND\RNDBASE.c"
+						RelativePath=".\ANIM\RND\RNDBASE.c"
 						>
 					</File>
 					<File
-						RelativePath=".\RND\RNDDATA.c"
+						RelativePath=".\ANIM\RND\RNDDATA.c"
 						>
 					</File>
 					<File
-						RelativePath=".\RND\RNDPRIM.c"
+						RelativePath=".\ANIM\RND\RNDPRIM.c"
 						>
 					</File>
 				</Filter>
@@ -247,6 +251,10 @@
 				</File>
 				<File
 					RelativePath=".\UNITS\U_CTRL.c"
+					>
+				</File>
+				<File
+					RelativePath=".\UNITS\UNITS.h"
 					>
 				</File>
 			</Filter>

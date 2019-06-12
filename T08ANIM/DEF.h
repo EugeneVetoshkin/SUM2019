@@ -1,7 +1,7 @@
 #ifndef __DEF_H_
 #define __DEF_H_
 
-#pragma warning(disable: 4244 4305)
+#pragma warning(disable: 4244 4305 )
 
 /* Debug memory allocation support */
 #ifdef _DEBUG

@@ -1,51 +1,54 @@
+/*  *FILENAME: UNITS.c 
+    *PROGRAMMER: Vetoshkin Eugene
+    *DATE: 11.06.2019 
+    *PURPOSE: project*/
 
-#include "..\DEF.h"
-#include "ANIM.h"
+#include "anim.h"
 
 /* Unit initialization function.
  * ARGUMENTS:
  *   - self-pointer to unit object:
- *       EV5_UNIT *Uni;
+ *       ev5UNIT *Uni;
  *   - animation context:
- *       EV5_ANIM *Ani;
+ *       ev5ANIM *Ani;
  * RETURNS: None.
  */
-static VOID EV5_UnitInit( EV5_UNIT *Uni, EV5_ANIM *Ani )
+static VOID EV5_UnitInit( ev5UNIT *Uni, ev5ANIM *Ani )
 {
 } /* End of 'EV5_UnitInit' function */
 
 /* Unit deinitialization function.
  * ARGUMENTS:
  *   - self-pointer to unit object:
- *       EV5_UNIT *Uni;
+ *       ev5UNIT *Uni;
  *   - animation context:
- *       EV5_ANIM *Ani;
+ *       ev5ANIM *Ani;
  * RETURNS: None.
  */
-static VOID EV5_UnitClose( EV5_UNIT *Uni, EV5_ANIM *Ani )
+static VOID EV5_UnitClose( ev5UNIT *Uni, ev5ANIM *Ani )
 {
 } /* End of 'EV5_UnitClose' function */
 /* Unit inter frame events handle function.
  * ARGUMENTS:
  *   - self-pointer to unit object:
- *       EV5_UNIT *Uni;
+ *       ev5UNIT *Uni;
  *   - animation context:
- *       EV5_ANIM *Ani;
+ *       ev5ANIM *Ani;
  * RETURNS: None.
  */
-static VOID EV5_UnitResponse( EV5_UNIT *Uni, EV5_ANIM *Ani )
+static VOID EV5_UnitResponse( ev5UNIT *Uni, ev5ANIM *Ani )
 {
 } /* End of 'EV5_UnitResponse' function */
 
 /* Unit render function.
  * ARGUMENTS:
  *   - self-pointer to unit object:
- *       EV5_UNIT *Uni;
+ *       ev5UNIT *Uni;
  *   - animation context:
- *       EV5_ANIM *Ani;
+ *       ev5ANIM *Ani;
  * RETURNS: None.
  */
-static VOID EV5_UnitRender( EV5_UNIT *Uni, EV5_ANIM *Ani )
+static VOID EV5_UnitRender( ev5UNIT *Uni, ev5ANIM *Ani )
 {
 } /* End of 'EV5_UnitRender' function */
 
@@ -55,14 +58,14 @@ static VOID EV5_UnitRender( EV5_UNIT *Uni, EV5_ANIM *Ani )
  *   - unit structure size in bytes:
  *       INT Size;
  * RETURNS:
- *   (EV5_UNIT *) pointer to created unit.
+ *   (ev5UNIT *) pointer to created unit.
  */
-EV5_UNIT * EV5_AnimUnitCreate( INT Size )
+ev5UNIT * EV5_AnimUnitCreate( INT Size )
 {
-  EV5_UNIT *Uni;
+  ev5UNIT *Uni;
 
   /* Memory allocation */
-  if (Size < sizeof(EV5_UNIT) || (Uni = malloc(Size)) == NULL)
+  if (Size < sizeof(ev5UNIT) || (Uni = malloc(Size)) == NULL)
     return NULL;
   memset(Uni, 0, Size);
 
@@ -73,18 +76,5 @@ EV5_UNIT * EV5_AnimUnitCreate( INT Size )
   Uni->Render = EV5_UnitRender;
   return Uni;
 } /* End of 'EV5_AnimUnitCreate' function */
-
-
-
-/*   
-static VOID EV5_UnitInit( IK3UNIT_BALL *Uni, IK3ANIM *Ani )
-{
-  Uni->Pos = VecSet(0, 1, 0);
-} 
-static VOID EV5_UnitResponse( IK3UNIT_BALL *Uni, IK3ANIM *Ani );
-{
-  Uni->Pos += Ani->DeltaTime * 2.4;
-}  */
-
 
 /* End of "UNITS.c" function */

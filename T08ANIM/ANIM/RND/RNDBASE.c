@@ -1,26 +1,57 @@
-#include <stdlib.h>
-#include <windows.h>
-#include "DEF.H"
-#include "..\MTH\MTH.h"
-#include "RND.H"
+/* FILE NAME   : RNDBASE.H
+ * PURPOSE     : WinAPI animation system.
+ *               Base definitions.
+ * PROGRAMMER  : Vetoshkin Eugene.
+ * LAST UPDATE : 10.06.2019.
+ * NOTE        : Module prefix 'EV5'.
+ */
+
+#include "..\..\DEF.H"
+#include "RND.h"
+
+VOID EV5_RndStart(VOID)
+{
+  SelectObject(EV5_hDCRndFrame, EV5_hBmRndFrame);
+  SelectObject(EV5_hDCRndFrame, GetStockObject(WHITE_BRUSH));
+  Rectangle(EV5_hDCRndFrame, 0, 0, EV5_RndFrameW, EV5_RndFrameW);
+  SelectObject(EV5_hDCRndFrame, GetStockObject(NULL_BRUSH));
+  SelectObject(EV5_hDCRndFrame, GetStockObject(BLACK_PEN));
+}
+VOID EV5_RndEnd(VOID)
+{
+
+}
+
+VOID EV5_RndCamSet(VEC Loc, VEC At, VEC Up1)
+{
+  EV5_RndMatrView = MatrView(Loc, At, Up1);
+  EV5_RndMatrVP = MatrMulMatr(EV5_RndMatrView, EV5_RndMatrProj);
+}
 
 VOID EV5_RndInit(HWND hWnd)
 {
   HDC hDC;
-  SetTimer(hWnd, 47, 1000, NULL);
+
   hDC = GetDC(hWnd);
   EV5_hDCRndFrame = CreateCompatibleDC(hDC);
   ReleaseDC(hWnd, hDC);
+
+  EV5_RndCamSet(VecSet(-100, 40, 0), VecSet(0, 0, 0), VecSet(0, 1, 0));
 }
+
 VOID EV5_RndClose(VOID)
 {
   DeleteObject(EV5_hBmRndFrame);
   DeleteDC(EV5_hDCRndFrame);
-  KillTimer(EV5_hWndRnd, 47);
-  PostQuitMessage(0);
-  return 0;
-
 }
+
+VOID EV5_RndCopyFrame(HDC hDC)
+{
+  BitBlt(hDC, 0, 0, EV5_RndFrameW, EV5_RndFrameH,
+    EV5_hDCRndFrame, 0, 0, SRCCOPY);
+}
+
+
 VOID EV5_RndResize(INT W, INT H)
 {
   HDC hDC;
@@ -37,29 +68,6 @@ VOID EV5_RndResize(INT W, INT H)
   EV5_RndFrameH = H;
   EV5_RndProjSet();
 }
-
-VOID EV5_RndStart(VOID)
-{
-  SelectObject(EV5_hDCRndFrame, EV5_hBmRndFrame);
-  SelectObject(EV5_hDCRndFrame, GetStockObject(WHITE_BRUSH));
-  Rectangle(EV5_hDCRndFrame, 0, 0, EV5_RndFrameW, EV5_RndFrameW);
-
-
-  SelectObject(EV5_hDCRndFrame, GetStockObject(NULL_BRUSH));
-  SelectObject(EV5_hDCRndFrame, GetStockObject(BLACK_PEN));
-}
-
-/*VOID EV5_RndEnd( VOID )
-{
-
-}       */
-
-VOID EV5_RndCopyFrame(HDC hDC)
-{
-  BitBlt(hDC, 0, 0, EV5_RndFrameW, EV5_RndFrameH,
-    EV5_hDCRndFrame, 0, 0, SRCCOPY);
-}
-
 VOID EV5_RndProjSet(VOID)
 {
   DBL ratio_x, ratio_y;
@@ -74,8 +82,4 @@ VOID EV5_RndProjSet(VOID)
   EV5_RndMatrVP = MatrMulMatr(EV5_RndMatrView, EV5_RndMatrProj);
 }
 
-VOID EV5_RndCamSet(VEC Loc, VEC At, VEC Up1)
-{
-  EV5_RndMatrView = MatrView(Loc, At, Up1);
-  EV5_RndMatrVP = MatrMulMatr(EV5_RndMatrView, EV5_RndMatrProj);
-}
+/*End of RNDBASE.C*/
